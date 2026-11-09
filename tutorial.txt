@@ -1,0 +1,47 @@
+Berikut adalah modul atau pustaka (package) npm yang diperlukan untuk menjalankan script bot WhatsApp DND tersebut.
+Anda cukup menyalin dan menjalankan perintah berikut di terminal/panel Anda untuk menginstalnya:
+copy button
+npm install @whiskeysockets/baileys @hapi/boom pino qrcode
+end copy button
+Rincian Modul:
+ * @whiskeysockets/baileys — Pustaka utama untuk menghubungkan bot ke WhatsApp dan menangani panggilan masuk (call handling).
+ * @hapi/boom — Modul untuk menangani objek error dengan format HTTP yang rapi saat koneksi bot terputus atau tersambung kembali.
+ * pino — Pustaka logger cepat yang dipakai oleh Baileys (diatur ke mode silent agar terminal Anda tidak terlalu ramai oleh teks log).
+ * qrcode — Modul yang digunakan untuk mengonversi dan menyimpan QR Code login secara otomatis menjadi file gambar WhatsApp.png.
+#Fitur2 Botnya
+Berikut adalah rangkuman lengkap mengenai daftar perintah (command) dan fitur yang ada di dalam bot asisten DND (Mode Sibuk) yang sudah kita buat, agar mudah kamu simpan dan catat:
+🤖 Daftar Perintah Bot DND (Mode Sibuk)
+Semua perintah di bawah ini hanya bisa diketik oleh kamu (Owner), baik melalui chat pribadi ke nomor bot maupun langsung di ruang obrolan "Kirim pesan ke diri sendiri". Perintah ditulis langsung tanpa menggunakan awalan titik (.).
+ * daftar <nomor>
+   * Fungsi: Mendaftarkan nomor penting (whitelist/VIP) agar bebas menelepon dan mengirim chat ke kamu meskipun bot sedang dalam Mode Sibuk.
+   * Contoh: daftar 085109050100 (nomor otomatis diconvert ke format internasional 628...)
+ * sibuk
+   * Fungsi: Mengaktifkan Mode Jangan Ganggu (DND) secara total.
+   * Efek:
+     * Panggilan masuk atau video call dari orang lain yang tidak terdaftar akan langsung ditolak (auto-reject) secara otomatis.
+     * Chat pribadi dari orang tak dikenal akan dibalas otomatis dengan teks: "lagi sibuk jangan ganggu" (hanya dibalas 1 kali setiap 15 menit agar tidak spam).
+ * normal atau online
+   * Fungsi: Mematikan Mode Sibuk dan mengembalikan fungsi WhatsApp ke seperti semula.
+   * Efek: Telepon dan chat masuk kembali normal tanpa ada penolakan atau balasan otomatis dari bot.
+ * list
+   * Fungsi: Menampilkan daftar seluruh nomor yang sudah kamu daftarkan ke dalam daftar pengecualian (Whitelist).
+ * hapus <nomor>
+   * Fungsi: Menghapus satu nomor tertentu dari daftar pengecualian.
+   * Contoh: hapus 085xxxxxx
+ * hapus semua
+   * Fungsi: Menghapus seluruh daftar nomor pengecualian sekaligus (nomor Owner kamu sendiri akan aman dan tidak ikut terhapus).
+ * help
+   * Fungsi: Memunculkan teks panduan menu perintah ringkas di dalam chat.
+Silakan disimpan! Catatan ini bisa kamu jadikan panduan cepat kapan pun kamu mau mengoperasikan atau mengingat fungsi perintah bot-nya.
+#tutorial cara mengedit index.jsnya
+Tentu! Berikut adalah tutorial cara mengganti nomor Owner di dalam script bot Anda:
+ * Buka file index.js Anda melalui panel Pterodactyl atau editor kode yang biasa Anda gunakan.
+ * Cari baris kode bagian atas yang mendefinisikan variabel ownerNumber (biasanya berada di sekitar baris ke-6 hingga ke-8). Kodenya seperti ini:
+   const ownerNumber = '6281xxxxxxxx'; 
+
+ * Ganti nomor '6281xxxxxxx' dengan nomor WhatsApp baru yang ingin Anda jadikan Owner.
+   * Catatan Penting: Pastikan menggunakan format nomor internasional dengan awalan 62 (kode negara Indonesia) dan tanpa menggunakan tanda plus (+), spasi, atau simbol apa pun (contoh: '6281234567890').
+ * Klik tombol SAVE CONTENT di bagian bawah panel.
+ * Pergi ke tab Console, lalu klik tombol Restart agar bot memuat ulang data nomor owner yang baru.
+Setelah di-restart, nomor baru tersebut resmi menjadi Owner dan memiliki hak penuh untuk menjalankan semua perintah bot (daftar, sibuk, normal, list, hapus, dll).
+syarat harus punya pterodactyl panel

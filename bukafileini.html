@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan & Instalasi Bot WhatsApp habibGM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <script>
+        // Cek preferensi tema awal (system / localStorage)
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans antialiased leading-relaxed transition-colors duration-300">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <!-- Header & Theme Toggle -->
+        <header class="bg-indigo-600 dark:bg-indigo-700 text-white rounded-2xl p-6 shadow-lg mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold mb-2">🤖 Panduan Bot WhatsApp habibGM (Mode Sibuk)</h1>
+                <p class="text-indigo-100 text-sm md:text-base">Dokumentasi lengkap instalasi modul, daftar perintah, dan konfigurasi owner.</p>
+            </div>
+            <button id="theme-toggle" class="bg-indigo-700 dark:bg-indigo-800 hover:bg-indigo-800 dark:hover:bg-indigo-900 text-white px-4 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2 shadow-sm border border-indigo-500/30 shrink-0">
+                <span id="theme-icon">🌙</span> <span id="theme-text">Mode Gelap</span>
+            </button>
+        </header>
+
+        <!-- Section: Modul NPM -->
+        <section class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-md mb-6 transition-colors duration-300">
+            <h2 class="text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 border-b dark:border-slate-700 pb-2">📦 Modul NPM yang Diperlukan</h2>
+            <p class="text-slate-600 dark:text-slate-300 mb-3 text-sm md:text-base">Salin dan jalankan perintah berikut di terminal/panel Anda:</p>
+            
+            <div class="relative bg-slate-900 text-emerald-400 p-4 rounded-xl font-mono text-xs md:text-sm overflow-x-auto mb-4 shadow-inner flex items-center justify-between group">
+                <code id="code-npm">npm install @whiskeysockets/baileys @hapi/boom pino qrcode</code>
+                <button onclick="copyCode('code-npm', this)" class="ml-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg text-xs font-sans transition flex items-center gap-1 shrink-0 border border-slate-700">
+                    📋 <span>Salin</span>
+                </button>
+            </div>
+
+            <h3 class="font-medium text-slate-700 dark:text-slate-200 mb-2 text-sm md:text-base">Rincian Modul:</h3>
+            <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm md:text-base">
+                <li><strong class="text-slate-800 dark:text-slate-100">@whiskeysockets/baileys</strong> — Pustaka utama untuk menghubungkan bot ke WhatsApp dan menangani panggilan masuk (call handling).</li>
+                <li><strong class="text-slate-800 dark:text-slate-100">@hapi/boom</strong> — Modul untuk menangani objek error dengan format HTTP yang rapi saat koneksi bot terputus atau tersambung kembali.</li>
+                <li><strong class="text-slate-800 dark:text-slate-100">pino</strong> — Pustaka logger cepat yang dipakai oleh Baileys (diatur ke mode silent agar terminal Anda tidak terlalu ramai oleh teks log).</li>
+                <li><strong class="text-slate-800 dark:text-slate-100">qrcode</strong> — Modul yang digunakan untuk mengonversi dan menyimpan QR Code login secara otomatis menjadi file gambar WhatsApp.png.</li>
+            </ul>
+        </section>
+
+        <!-- Section: Fitur & Perintah Bot -->
+        <section class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-md mb-6 transition-colors duration-300">
+            <h2 class="text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 border-b dark:border-slate-700 pb-2">⚡ Daftar Perintah Bot habibGM (Mode Sibuk)</h2>
+            <p class="text-slate-600 dark:text-slate-300 mb-4 text-sm md:text-base">Semua perintah di bawah ini hanya bisa diketik oleh Anda (Owner), baik melalui chat pribadi ke nomor bot maupun langsung di ruang obrolan "Kirim pesan ke diri sendiri". Perintah ditulis langsung tanpa menggunakan awalan titik (.).</p>
+            
+            <div class="grid gap-4 md:grid-cols-2">
+                <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50 dark:bg-slate-700/50 shadow-sm">
+                    <code class="text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/50 px-2 py-1 rounded">daftar &lt;nomor&gt;</code>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2"><strong class="text-slate-700 dark:text-slate-200">Fungsi:</strong> Mendaftarkan nomor penting (whitelist/VIP) agar bebas menelepon dan mengirim chat ke kamu meskipun bot sedang dalam Mode Sibuk.</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1"><strong class="text-slate-700 dark:text-slate-300">Contoh:</strong> daftar 085xxxxxxxxx (nomor otomatis diconvert ke format internasional 628...)</p>
+                </div>
+
+                <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50 dark:bg-slate-700/50 shadow-sm">
+                    <code class="text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/50 px-2 py-1 rounded">sibuk</code>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2"><strong class="text-slate-700 dark:text-slate-200">Fungsi:</strong> Mengaktifkan Mode Jangan Ganggu (habibGM) secara total.</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1"><strong class="text-slate-700 dark:text-slate-300">Efek:</strong> Panggilan dari orang tak terdaftar ditolak otomatis & chat tak dikenal dibalas teks "lagi sibuk jangan ganggu" (hanya 1 kali setiap 15 menit).</p>
+                </div>
+
+                <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50 dark:bg-slate-700/50 shadow-sm">
+                    <code class="text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/50 px-2 py-1 rounded">normal / online</code>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2"><strong class="text-slate-700 dark:text-slate-200">Fungsi:</strong> Mematikan Mode Sibuk dan mengembalikan fungsi WhatsApp ke seperti semula.</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1"><strong class="text-slate-700 dark:text-slate-300">Efek:</strong> Telepon dan chat masuk kembali normal tanpa penolakan atau balasan otomatis bot.</p>
+                </div>
+
+                <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50 dark:bg-slate-700/50 shadow-sm">
+                    <code class="text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/50 px-2 py-1 rounded">list</code>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2"><strong class="text-slate-700 dark:text-slate-200">Fungsi:</strong> Menampilkan daftar seluruh nomor yang sudah kamu daftarkan ke dalam daftar pengecualian (Whitelist).</p>
+                </div>
+
+                <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50 dark:bg-slate-700/50 shadow-sm">
+                    <code class="text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/50 px-2 py-1 rounded">hapus &lt;nomor&gt;</code>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2"><strong class="text-slate-700 dark:text-slate-200">Fungsi:</strong> Menghapus satu nomor tertentu dari daftar pengecualian.</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1"><strong class="text-slate-700 dark:text-slate-300">Contoh:</strong> hapus 085xxxxxx</p>
+                </div>
+
+                <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50 dark:bg-slate-700/50 shadow-sm">
+                    <code class="text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/50 px-2 py-1 rounded">hapus semua</code>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2"><strong class="text-slate-700 dark:text-slate-200">Fungsi:</strong> Menghapus seluruh daftar nomor pengecualian sekaligus (nomor Owner kamu sendiri aman dan tidak ikut terhapus).</p>
+                </div>
+            </div>
+
+            <div class="mt-4 border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50 dark:bg-slate-700/50 shadow-sm">
+                <code class="text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/50 px-2 py-1 rounded">help</code>
+                <p class="text-sm text-slate-600 dark:text-slate-300 mt-2"><strong class="text-slate-700 dark:text-slate-200">Fungsi:</strong> Memunculkan teks panduan menu perintah ringkas di dalam chat.</p>
+            </div>
+        </section>
+
+        <!-- Section: Tutorial Edit index.js -->
+        <section class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-md mb-6 transition-colors duration-300">
+            <h2 class="text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 border-b dark:border-slate-700 pb-2">🛠️ Tutorial Cara Mengedit index.js</h2>
+            <div class="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-500 p-4 rounded-r-xl mb-4 text-sm text-amber-800 dark:text-amber-200">
+                <strong class="font-semibold">Syarat Utama:</strong> Harus punya Pterodactyl panel.
+            </div>
+            <ol class="list-decimal list-inside space-y-3 text-slate-600 dark:text-slate-300 text-sm md:text-base">
+                <li>Buka file <code class="text-indigo-600 dark:text-indigo-400 font-mono">index.js</code> Anda melalui panel Pterodactyl atau editor kode yang biasa Anda gunakan.</li>
+                <li>Cari baris kode bagian atas yang mendefinisikan variabel <code class="text-indigo-600 dark:text-indigo-400 font-mono">ownerNumber</code> (biasanya berada di sekitar baris ke-6 hingga ke-8). Kodenya seperti ini:
+                    <div class="relative bg-slate-900 text-emerald-400 p-3 rounded-lg font-mono text-xs md:text-sm my-2 shadow-inner flex items-center justify-between group">
+                        <code id="code-owner">const ownerNumber = '6281xxxxxxxx';</code>
+                        <button onclick="copyCode('code-owner', this)" class="ml-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1 rounded text-xs font-sans transition flex items-center gap-1 shrink-0 border border-slate-700">
+                            📋 <span>Salin</span>
+                        </button>
+                    </div>
+                </li>
+                <li>Ganti nomor <code class="text-indigo-600 dark:text-indigo-400 font-mono">'6281xxxxxxx'</code> dengan nomor WhatsApp baru yang ingin Anda jadikan Owner.
+                    <div class="bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/50 text-rose-700 dark:text-rose-300 p-3 rounded-lg text-xs mt-2">
+                        ⚠️ <strong class="font-semibold">Catatan Penting:</strong> Pastikan menggunakan format nomor internasional dengan awalan 62 (kode negara Indonesia) dan tanpa menggunakan tanda plus (+), spasi, atau simbol apa pun (contoh: <code class="font-mono">'6281234567890'</code>).
+                    </div>
+                </li>
+                <li>Klik tombol <strong class="text-slate-700 dark:text-slate-200">SAVE CONTENT</strong> di bagian bawah panel.</li>
+                <li>Pergi ke tab <strong class="text-slate-700 dark:text-slate-200">Console</strong>, lalu klik tombol <strong class="text-slate-700 dark:text-slate-200">Restart</strong> agar bot memuat ulang data nomor owner yang baru. Setelah di-restart, nomor baru resmi menjadi Owner.</li>
+            </ol>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-slate-500 dark:text-slate-400 text-xs md:text-sm py-4 border-t dark:border-slate-800">
+            <p>Simpan dan jadikan panduan cepat kapan pun Anda mengoperasikan bot.</p>
+        </footer>
+    </div>
+
+    <!-- Script for Theme Toggle & Copy Functionality -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeText = document.getElementById('theme-text');
+
+        function updateThemeUI(isDark) {
+            if (isDark) {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Mode Terang';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Mode Gelap';
+            }
+        }
+
+        // Set initial UI based on html class
+        updateThemeUI(document.documentElement.classList.contains('dark'));
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                updateThemeUI(false);
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                updateThemeUI(true);
+            }
+        });
+
+        // Copy code function with feedback
+        function copyCode(elementId, btnElement) {
+            const codeText = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                const originalContent = btnElement.innerHTML;
+                btnElement.innerHTML = '✅ <span>Tersalin!</span>';
+                btnElement.classList.add('bg-emerald-950', 'text-emerald-300', 'border-emerald-600');
+                
+                setTimeout(() => {
+                    btnElement.innerHTML = originalContent;
+                    btnElement.classList.remove('bg-emerald-950', 'text-emerald-300', 'border-emerald-600');
+                }, 2000);
+            }).catch(err => {
+                console.error('Gagal menyalin: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
